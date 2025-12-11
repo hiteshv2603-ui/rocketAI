@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 
 # Page config
-st.set_page_config(page_title="rocketAI v4.0", page_icon="🚀", layout="wide")
+st.set_page_config(page_title="rocketAI v4.0", page_icon="", layout="wide")
 
 # Custom CSS
 st.markdown("""
@@ -44,15 +44,15 @@ if 'validation_data' not in st.session_state:
     st.session_state.validation_data = []
 
 # Title
-st.markdown('<p class="main-header">🚀 rocketAI v4.0</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-header"> rocketAI v4.0</p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">AI-Powered Rocket Performance Prediction | Competition Edition</p>', unsafe_allow_html=True)
 st.markdown("**By Hitesh V | Liberty Middle School | Aerospace & Computing**")
 
 # Sidebar
-st.sidebar.header("🎯 Mission Control")
+st.sidebar.header(" Mission Control")
 
 # Preset rockets
-st.sidebar.subheader("📚 Load Preset Design")
+st.sidebar.subheader(" Load Preset Design")
 presets = {
     "Custom Design": None,
     "Estes Alpha III (Model)": {
