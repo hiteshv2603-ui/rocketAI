@@ -44,15 +44,15 @@ if 'validation_data' not in st.session_state:
     st.session_state.validation_data = []
 
 # Title
-st.markdown('<p class="main-header">🚀 rocketAI v4.0</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-header"> rocketAI v4.0</p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">AI-Powered Rocket Performance Prediction | Competition Edition</p>', unsafe_allow_html=True)
 st.markdown("**By Hitesh V | Liberty Middle School | Aerospace & Computing**")
 
 # Sidebar
-st.sidebar.header("🎯 Mission Control")
+st.sidebar.header("Mission Control")
 
 # Preset rockets
-st.sidebar.subheader("📚 Load Preset Design")
+st.sidebar.subheader("Load Preset Design")
 presets = {
     "Custom Design": None,
     "Estes Alpha III (Model)": {
@@ -108,7 +108,7 @@ else:
         "motor_mass": 60.0, "cd": 0.45
     }
 
-st.sidebar.subheader("📐 Rocket Specifications")
+st.sidebar.subheader("Rocket Specifications")
 
 # Basic specs
 mass = st.sidebar.number_input("Total Mass (grams)", min_value=1.0, value=defaults["mass"], step=10.0)
@@ -118,29 +118,29 @@ cg = st.sidebar.number_input("Center of Gravity (inches from nose)", min_value=0
 cp = st.sidebar.number_input("Center of Pressure (inches from nose)", min_value=0.0, value=defaults["cp"], step=0.1)
 
 # Fins
-st.sidebar.subheader("🦈 Fin Configuration")
+st.sidebar.subheader("Fin Configuration")
 fin_count = st.sidebar.number_input("Number of Fins", min_value=3, max_value=6, value=defaults["fin_count"], step=1)
 fin_span = st.sidebar.number_input("Fin Span (inches)", min_value=0.5, value=defaults["fin_span"], step=0.1)
 
 # Motor specs
-st.sidebar.subheader("🔥 Motor Specifications")
+st.sidebar.subheader("Motor Specifications")
 motor_impulse = st.sidebar.number_input("Total Impulse (Newton-seconds)", min_value=0.1, value=defaults["motor_impulse"], step=0.5)
 burn_time = st.sidebar.number_input("Burn Time (seconds)", min_value=0.1, value=defaults["burn_time"], step=0.1)
 motor_mass = st.sidebar.number_input("Motor Mass (grams)", min_value=1.0, value=defaults["motor_mass"], step=5.0)
 
 # Advanced settings
-st.sidebar.subheader("⚙️ Advanced Settings")
+st.sidebar.subheader("Advanced Settings")
 cd = st.sidebar.slider("Drag Coefficient (Cd)", min_value=0.2, max_value=0.8, value=defaults["cd"], step=0.01)
 launch_angle = st.sidebar.slider("Launch Angle (degrees)", min_value=80, max_value=90, value=90, step=1)
 wind_speed = st.sidebar.slider("Wind Speed (mph)", min_value=0.0, max_value=20.0, value=0.0, step=1.0)
 
 # Educational mode
-st.sidebar.subheader("🎓 Display Options")
+st.sidebar.subheader("Display Options")
 show_math = st.sidebar.checkbox("Show Mathematical Derivations", value=False)
 show_validation = st.sidebar.checkbox("Show Validation Data", value=False)
 
 # Main analysis button
-analyze_btn = st.button("🚀 LAUNCH ANALYSIS", type="primary", use_container_width=True)
+analyze_btn = st.button("LAUNCH ANALYSIS", type="primary", use_container_width=True)
 
 if analyze_btn:
     # Constants
@@ -165,9 +165,9 @@ if analyze_btn:
     # ========================================
     # 1. STABILITY ANALYSIS
     # ========================================
-    st.header("📊 Flight Analysis Results")
+    st.header("Flight Analysis Results")
     
-    st.subheader("1️⃣ Stability Analysis")
+    st.subheader("Stability Analysis")
     
     stability_margin = (cp - cg) / diameter
     
@@ -225,7 +225,7 @@ if analyze_btn:
     # ========================================
     # 2. FLIGHT SIMULATION
     # ========================================
-    st.subheader("2️⃣ Flight Trajectory Simulation")
+    st.subheader("Flight Trajectory Simulation")
     
     # Time step
     dt = 0.01  # 10ms timesteps for accuracy
@@ -320,17 +320,17 @@ if analyze_btn:
     
     with col1:
         st.line_chart(df.set_index('Time (s)')['Altitude (ft)'], color='#0066FF')
-        st.caption("📈 Altitude Profile")
+        st.caption("Altitude Profile")
     
     with col2:
         st.line_chart(df.set_index('Time (s)')['Velocity (mph)'], color='#FF0000')
-        st.caption("📈 Velocity Profile")
+        st.caption("Velocity Profile")
     
     st.line_chart(df.set_index('Time (s)')['Acceleration (G)'], color='#00CC66')
-    st.caption("📈 Acceleration Profile (G-Forces)")
+    st.caption("Acceleration Profile (G-Forces)")
     
     if show_math:
-        with st.expander("🔬 Flight Physics Equations"):
+        with st.expander("Flight Physics Equations"):
             st.write("**Drag Force:**")
             st.latex(r"F_d = \frac{1}{2} \rho v^2 C_d A")
             st.write("**Net Force:**")
@@ -348,7 +348,7 @@ if analyze_btn:
     # ========================================
     # 3. PERFORMANCE METRICS
     # ========================================
-    st.subheader("3️⃣ Performance Metrics")
+    st.subheader("Performance Metrics")
     
     max_velocity = max(velocity_data)
     max_acceleration = max(acceleration_data)
@@ -357,20 +357,20 @@ if analyze_btn:
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("🎯 Apogee", f"{apogee:.0f} ft")
-        st.metric("⏱️ Time to Apogee", f"{apogee_time:.1f} sec")
+        st.metric("Apogee", f"{apogee:.0f} ft")
+        st.metric("Time to Apogee", f"{apogee_time:.1f} sec")
     
     with col2:
-        st.metric("🚄 Max Velocity", f"{max_velocity:.1f} mph")
-        st.metric("🔥 Burnout Velocity", f"{burnout_velocity * 2.237:.1f} mph")
+        st.metric("Max Velocity", f"{max_velocity:.1f} mph")
+        st.metric("Burnout Velocity", f"{burnout_velocity * 2.237:.1f} mph")
     
     with col3:
-        st.metric("💪 Max Acceleration", f"{max_acceleration:.1f} G")
-        st.metric("⚡ Avg Thrust", f"{avg_thrust:.1f} N")
+        st.metric("Max Acceleration", f"{max_acceleration:.1f} G")
+        st.metric("Avg Thrust", f"{avg_thrust:.1f} N")
     
     with col4:
-        st.metric("🕐 Total Flight Time", f"{total_flight_time:.1f} sec")
-        st.metric("🌬️ Max Drag Force", f"{max_drag:.2f} N")
+        st.metric("Total Flight Time", f"{total_flight_time:.1f} sec")
+        st.metric("Max Drag Force", f"{max_drag:.2f} N")
     
     # Energy analysis
     kinetic_energy = 0.5 * mass_kg * (burnout_velocity ** 2)
@@ -379,7 +379,7 @@ if analyze_btn:
     
     st.divider()
     
-    st.subheader("⚡ Energy Analysis")
+    st.subheader("Energy Analysis")
     
     col1, col2, col3 = st.columns(3)
     
@@ -397,7 +397,7 @@ if analyze_btn:
     # ========================================
     # 4. AI RECOMMENDATIONS
     # ========================================
-    st.subheader("🤖 AI-Powered Design Recommendations")
+    st.subheader("AI-Powered Design Recommendations")
     
     issues = []
     warnings = []
@@ -462,7 +462,7 @@ if analyze_btn:
     # ========================================
     # 5. DESIGN COMPARISON
     # ========================================
-    st.subheader("📊 Industry Comparison")
+    st.subheader("Industry Comparison")
     
     # Store current design
     current_design = {
@@ -629,7 +629,7 @@ with col2:
     st.caption("Liberty Middle School | 7th Grade")
 
 with col3:
-    st.caption("🏢 **Aerospace & Computing**")
+    st.caption("**Aerospace & Computing**")
     st.caption("Project-Based Company")
 
 st.caption("---")
